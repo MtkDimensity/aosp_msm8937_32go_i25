@@ -8,11 +8,10 @@
 
 set -e
 
-# 设备代号和厂商
 DEVICE=msm8937_32go_i25
 VENDOR=xtc
 
-# 加载 extract_utils 并检查路径
+# Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
@@ -25,10 +24,9 @@ if [ ! -f "${HELPER}" ]; then
 fi
 source "${HELPER}"
 
-# 默认清理 vendor 目录
+# Default to sanitizing the vendor folder before extraction
 CLEAN_VENDOR=true
 
-# 解析命令行参数
 KANG=
 SECTION=
 
@@ -51,16 +49,13 @@ while [ "${#}" -gt 0 ]; do
     shift
 done
 
-# 如果没有指定源，默认使用 adb
 if [ -z "${SRC}" ]; then
     SRC="adb"
 fi
 
-# 初始化 helper 脚本
+# Initialize the helper
 setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
 
-# 提取专有文件
 extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 
-# 生成 makefile
 "${MY_DIR}/setup-makefiles.sh"

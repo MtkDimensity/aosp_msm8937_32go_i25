@@ -8,11 +8,10 @@
 
 set -e
 
-# 设备代号和厂商
 DEVICE=msm8937_32go_i25
 VENDOR=xtc
 
-# 加载 extract_utils 并检查路径
+# Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
@@ -25,14 +24,13 @@ if [ ! -f "${HELPER}" ]; then
 fi
 source "${HELPER}"
 
-# 初始化 helper 脚本
+# Initialize the helper
 setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}"
 
-# 生成警告头和保护
+# Warning headers and guards
 write_headers
 
-# 生成 makefile 规则
 write_makefiles "${MY_DIR}/proprietary-files.txt" true
 
-# 生成结束标记
+# Finish
 write_footers

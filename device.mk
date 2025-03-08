@@ -3,7 +3,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # 继承设备的配置
-$(call inherit-product, $(LOCAL_PATH)/msm8937_32go_i25.mk)
+$(call inherit-product, $(LOCAL_PATH)/aosp_msm8937_32go_i25.mk)
 
 # Health HAL
 PRODUCT_PACKAGES += \

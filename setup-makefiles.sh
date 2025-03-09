@@ -144,3 +144,8 @@ EOF
 
 # Finish
 write_footers
+ANDROID_BP="${ANDROID_ROOT}/vendor/${VENDOR}/${DEVICE}/Android.bp"
+if [[ -f "${ANDROID_BP}" ]]; then
+    echo "Removing generated Android.bp file: ${ANDROID_BP}"
+    rm -f "${ANDROID_BP}"
+fi

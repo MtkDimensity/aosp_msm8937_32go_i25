@@ -62,3 +62,9 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # 继承专有文件
 $(call inherit-product, vendor/xtc/msm8937_32go_i25/msm8937_32go_i25-vendor.mk)
+# 覆盖默认的 init.rc 文件
+PRODUCT_COPY_FILES += \
+    device/xtc/msm8937_32go_i25/rootdir/init.rc:root/init.rc
+
+# 移除默认的 init.rc 文件
+PRODUCT_COPY_FILES := $(filter-out system/core/rootdir/init.rc:root/init.rc,$(PRODUCT_COPY_FILES))
